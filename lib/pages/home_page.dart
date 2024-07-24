@@ -39,7 +39,7 @@ class _HomePageState extends State<HomePage> {
       context: context,
       builder: (builder) {
         return DialogBox(
-          MyController: _controller,
+          myController: _controller,
           onSave: saveNewTask,
           onCancel: () => Navigator.of(context).pop(),
         );
@@ -50,7 +50,6 @@ class _HomePageState extends State<HomePage> {
   void deleteTask(int index) {
     setState(() {
       db.toDoList.removeAt(index);
-      print(db.toDoList);
     });
     db.updateData();
   }
@@ -70,12 +69,14 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: const Color.fromARGB(255, 248, 180, 159),
       appBar: AppBar(
         backgroundColor: Colors.orange[500],
-        title: (Text("To Do")),
+        title: (const Text("To Do")),
         foregroundColor: Colors.white,
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: createNewTask,
-        child: Icon(Icons.add),
+        backgroundColor: Colors.orange,
+        foregroundColor: Colors.white,
+        child: const Icon(Icons.add),
       ),
       body: ListView.builder(
         itemCount: db.toDoList.length,
