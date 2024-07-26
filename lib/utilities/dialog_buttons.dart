@@ -10,13 +10,14 @@ class Buttons extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialButton(
       onPressed: onPressed,
-      textColor: Colors.orange,
+      textColor: Theme.of(context).colorScheme.primary,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       color: Colors.white,
       child: Text(
         text,
-        style: const TextStyle(
-            color: Colors.orange, backgroundColor: Colors.white),
+        style: TextStyle(
+            color: Theme.of(context).colorScheme.primary,
+            backgroundColor: Colors.white),
       ),
     );
   }

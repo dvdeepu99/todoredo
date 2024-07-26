@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:provider/provider.dart';
 import 'package:todoredo/data/database.dart';
+import 'package:todoredo/theme/theme_provider.dart';
 import 'package:todoredo/utilities/dialog_box.dart';
 import 'package:todoredo/utilities/todo_tile.dart';
 
@@ -66,17 +68,36 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 248, 180, 159),
+      //backgroundColor: const Color.fromARGB(255, 248, 180, 159),
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
-        backgroundColor: Colors.orange[500],
+        backgroundColor: Theme.of(context).colorScheme.primary,
         title: (const Text("To Do")),
         foregroundColor: Colors.white,
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: createNewTask,
-        backgroundColor: Colors.orange,
-        foregroundColor: Colors.white,
-        child: const Icon(Icons.add),
+      floatingActionButton: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          FloatingActionButton(
+            onPressed: () {
+              Provider.of<ThemeProvider>(context, listen: false).toggleTheme();
+            },
+            // onPressed: () {
+            //   print(Provider.of<ThemeProvider>(context, listen: false)
+            //       .orangeData);
+            // },
+            backgroundColor: Theme.of(context).colorScheme.primary,
+            foregroundColor: Colors.white,
+            child: const Icon(Icons.sunny_snowing),
+          ),
+          const SizedBox(height: 20),
+          FloatingActionButton(
+            onPressed: createNewTask,
+            backgroundColor: Theme.of(context).colorScheme.primary,
+            foregroundColor: Colors.white,
+            child: const Icon(Icons.add),
+          ),
+        ],
       ),
       body: ListView.builder(
         itemCount: db.toDoList.length,
